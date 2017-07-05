@@ -135,6 +135,9 @@ public class TransactionProcessor {
           throws ParseException, IOException {
 
     for(String jsonString : stream.toArray(String[]::new)) {
+      if (jsonString.isEmpty()) {
+        continue;
+      }
       JSONObject jsonObject = (JSONObject) JSON_PARSER.parse(jsonString);
       String eventType = (String) jsonObject.get(EVENT_TYPE_KEY);
       if (eventType == null) {
@@ -177,7 +180,7 @@ public class TransactionProcessor {
             Integer amount = PurchaseManager.amountStringToInteger((String)jsonObject.get(AMOUNT_KEY));
 
             User user = User.getOrCreateUser(id);
-            if (anomalyWriter != null) { // && user.purchaseIsAnomaly(amount)) {
+            if (anomalyWriter != null) {
               int[] anomalyData = user.getAnomalyData(amount);
               if (anomalyData != null) {
                 //**********************
@@ -193,6 +196,7 @@ public class TransactionProcessor {
                                 PurchaseManager.amountIntegerToString(anomalyData[0]),
                                 PurchaseManager.amountIntegerToString(anomalyData[1])));
                 anomalyWriter.write(STRING_BUILDER.toString());
+                anomalyWriter.newLine();
               }
             }
             user.addPurchase(timestamp, amount);
