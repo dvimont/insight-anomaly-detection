@@ -26,7 +26,7 @@
  * by more than three times the standard deviation of all of those purchases.
  * <br><hr>
  * <h3>Dependencies</h3>
-  * In order to be executed, this package requires an environment in which
+ * In order to be executed, this package requires an environment in which
  * <a href="http://www.oracle.com/technetwork/java/javase/downloads/index.html" target="_blank">
  * Java 1.8</a> and <a href="https://maven.apache.org/install.html"target="_blank">Maven</a>
  * have been installed.
