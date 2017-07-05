@@ -6,4 +6,3 @@
 /insight_testsuite/temp/
 /log_output/flagged_purchases.json.*.json
 /insight_testsuite/results.txt
-/insight_testsuite/tests/test_network/
