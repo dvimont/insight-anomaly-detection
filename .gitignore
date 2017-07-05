@@ -1,0 +1,8 @@
+/nbactions.xml
+/nb-configuration.xml
+/target/
+
+
+/insight_testsuite/temp/
+/log_output/flagged_purchases.json.*.json
+/insight_testsuite/results.txt
