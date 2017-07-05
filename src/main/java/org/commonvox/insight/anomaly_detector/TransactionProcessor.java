@@ -134,6 +134,7 @@ public class TransactionProcessor {
   public final void processStreamInput(Stream<String> stream, BufferedWriter anomalyWriter)
           throws ParseException, IOException {
 
+    boolean pastFirstOutputLine = false;
     for(String jsonString : stream.toArray(String[]::new)) {
       if (jsonString.isEmpty()) {
         continue;
@@ -195,8 +196,12 @@ public class TransactionProcessor {
                                 MEAN_SD_JSON_TEMPLATE,
                                 PurchaseManager.amountIntegerToString(anomalyData[0]),
                                 PurchaseManager.amountIntegerToString(anomalyData[1])));
+                if (pastFirstOutputLine) {
+                  anomalyWriter.newLine();
+                } else {
+                  pastFirstOutputLine = true;
+                }
                 anomalyWriter.write(STRING_BUILDER.toString());
-                anomalyWriter.newLine();
               }
             }
             user.addPurchase(timestamp, amount);
